@@ -51,13 +51,16 @@
                       </div>
                       <input type="text" class="form-control" value="{{item.quantity}}" />
                       <div class="input-group-append">
+                        <form action="{% url 'add_cart' item.product.id %}" method="POST">
+                          {% csrf_token %}
                         <button
                           class="btn btn-light"
-                          type="button"
+                          type="submit"
                           id="button-minus"
                         >
                           <i class="fa fa-plus"></i>
                         </button>
+                      </form>
                       </div>
                     </div>
                     <!-- input-group.// -->
