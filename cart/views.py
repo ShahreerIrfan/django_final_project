@@ -9,9 +9,16 @@ def cart(request):
     cart_id = Cart.objects.filter(cart_id = session_id).exists()
     
     cart_items = None
+    tax = 0
+    total = 0
+    grand_total = 0
     if cart_id:
         cart_items = CartItem.objects.filter(cart = cartid)
-    return render(request, 'cart/cart.html',{'cart_items':cart_items})
+        for item in cart_items:
+            total+=item.product.price * item.quantity
+    tax = (2*total)/100
+    grand_total = total+tax
+    return render(request, 'cart/cart.html',{'cart_items':cart_items,'tax':tax,'total':total,'grand_total':grand_total})
 
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -37,9 +44,29 @@ def add_to_cart(request, product_id):
         cart_id = session_id
         )
         cart.save()
-    
 
-    
-    
     return redirect('cart')
-    
+
+
+
+def remove_cart_item(request,product_id):
+    product = Product.objects.get(id = product_id)
+    session_id = request.session.session_key
+    cartId = Cart.objects.get(cart_id = session_id)
+    cart_item = CartItem.objects.get(cart_id = cartId,product = product)
+    if cart_item.quantity>1:
+        cart_item.quantity-=1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    print(cart_item)
+
+    return redirect('cart')
+
+def remove_cart(request,product_id):
+    product = Product.objects.get(id = product_id)
+    session_id = request.session.session_key
+    cartId = Cart.objects.get(cart_id = session_id)
+    cart_item = CartItem.objects.get(cart_id = cartId,product = product)
+    cart_item.delete()
+    return redirect('cart')

@@ -41,13 +41,16 @@
                   <div class="col">
                     <div class="input-group input-spinner">
                       <div class="input-group-prepend">
-                        <button
+                        <form action="{% url 'remove_cart_item' item.product.id %}">
+                          {% csrf_token %}
+                          <button
                           class="btn btn-light"
-                          type="button"
+                          type="submit"
                           id="button-plus"
                         >
                           <i class="fa fa-minus"></i>
                         </button>
+                        </form>
                       </div>
                       <input type="text" class="form-control" value="{{item.quantity}}" />
                       <div class="input-group-append">
@@ -75,7 +78,7 @@
                   <!-- price-wrap .// -->
                 </td>
                 <td class="text-right">
-                  <a href="" class="btn btn-danger"> Remove</a>
+                  <a href="{% url 'remove_cart' item.product.id %}" class="btn btn-danger"> Remove</a>
                 </td>
               </tr>
               {% endfor %}
@@ -92,16 +95,16 @@
           <div class="card-body">
             <dl class="dlist-align">
               <dt>Total price:</dt>
-              <dd class="text-right">$69.97</dd>
+              <dd class="text-right">${{total}}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Tax:</dt>
-              <dd class="text-right">$10.00</dd>
+              <dd class="text-right">${{tax}}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Total:</dt>
               <dd class="text-right text-dark b">
-                <strong>$59.97</strong>
+                <strong>${{grand_total}}</strong>
               </dd>
             </dl>
             <hr />
