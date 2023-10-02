@@ -19,20 +19,19 @@
               </tr>
             </thead>
             <tbody>
-              {% for items in cart_items %}
+              {% for item in cart_items %}
               <tr>
                 <td>
                   <figure class="itemside align-items-center">
                     <div class="aside">
-                      <img src="{% static './images/items/11.jpg' %}" class="img-sm" />
+                      <img src="{{item.product.image.url}}" class="img-sm" />
                     </div>
                     <figcaption class="info">
                       <a href="#" class="title text-dark"
-                        >Camera Canon EOS M50 Kit</a
+                        >{{item.product.product_name}}</a
                       >
                       <p class="text-muted small">
-                        Matrix: 25 Mpx <br />
-                        Brand: Canon
+                        Category : {{item.product.category}}
                       </p>
                     </figcaption>
                   </figure>
@@ -50,7 +49,7 @@
                           <i class="fa fa-minus"></i>
                         </button>
                       </div>
-                      <input type="text" class="form-control" value="1" />
+                      <input type="text" class="form-control" value="{{item.quantity}}" />
                       <div class="input-group-append">
                         <button
                           class="btn btn-light"
@@ -67,8 +66,8 @@
                 </td>
                 <td>
                   <div class="price-wrap">
-                    <var class="price">$1156.00</var>
-                    <small class="text-muted"> $315.20 each </small>
+                    <var class="price">${{item.sub_total}}</var>
+                    <small class="text-muted"> ${{item.product.price}} each </small>
                   </div>
                   <!-- price-wrap .// -->
                 </td>
