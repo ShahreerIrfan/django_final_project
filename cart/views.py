@@ -120,6 +120,7 @@ def remove_cart(request, product_id):
 
 
 def checkout(request):
+    print(request.POST)
     cart_items = None
     tax = 0
     total = 0
