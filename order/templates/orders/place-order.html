@@ -132,7 +132,7 @@
 			  <textarea name="order_note" rows="2" class="form-control"></textarea>
 			</div>
 			<div class="form-row">
-			<input type="submit" value="Submit" class="btn btn-success">
+			
 			</div>
 		</form>
 	
@@ -167,12 +167,10 @@
 					<p class="text-center mb-3">
 					  <img src="{% static './images/misc/payments.png' %}" height="26" />
 					</p>
-					<a href="{% url 'checkout' %}" class="btn btn-primary btn-block">
-					  Checkout
+					<a href="{% url 'place_order' %}" class="btn btn-primary btn-block">
+					  Place Order
 					</a>
-					<a href="./store.html" class="btn btn-light btn-block"
-					  >Continue Shopping</a
-					>
+					
 				  </div>
 				  <!-- card-body.// -->
 				</div>
