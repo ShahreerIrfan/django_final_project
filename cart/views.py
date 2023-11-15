@@ -117,8 +117,3 @@ def remove_cart(request, product_id):
     cart_item = CartItem.objects.get(cart =cartid, product=product) # cart item filter korbo cartid ar product id er upor filter korbo
     cart_item.delete()
     return redirect('cart')
-
-
-
- 
- 
